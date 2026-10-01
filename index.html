@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memories Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="erek.css">
+</head>
+<body>
+
+<!-- ============================================================
+     ★ START SCREEN (this is what makes the music "auto" play)
+     Browsers block sound until the visitor taps once.
+     The first tap on this screen starts the music and opens the page.
+     ============================================================ -->
+<div class="start-screen" id="startScreen">
+  <p>OPEN ME PLS</p>
+</div>
+
+<!-- FILM STRIP SECTION -->
+<div class="film-container" id="filmContainer">
+
+  <!-- MAIN CARD (tap it on phone / hover it on desktop to open the strip) -->
+  <div class="main-card" id="mainCard">
+
+    <!-- ★ MAIN PHOTO: change the file name below -->
+    <img src="feona/cat.jpg" class="main-img" alt="CHIN">
+    <h2>My Constant</h2>
+    <p class="main-message">“I'm always here for you.”</p>
+
+    <!-- FILM-STRIP FRAMES -->
+    <div class="film-strip">
+
+      <div class="frame">
+        <img src="feona/first.jpg" alt="First Date">
+        <span>HAHAHA FIRST DATE</span>
+      </div>
+      <div class="frame">
+        <img src="feona/la _lang.jpg" alt="WALA LANG">
+        <span>BLE</span>
+      </div>
+      <div class="frame">
+        <img src="feona/cutie.jpg" alt="CUTIE">
+        <span>SO CUTE</span>
+      </div>
+      <div class="frame">
+        <img src="feona/pretty.jpg" alt="SO PRETTY">
+        <span>Ganda mo naman</span>
+      </div>
+      <div class="frame">
+        <img src="feona/love_u.jpg" alt="I LOVE YOU">
+        <span>“Together always”</span>
+      </div>
+      <div class="frame">
+        <img src="feona/meow.jpg" alt="MEOW">
+        <span>“Celebrating you”</span>
+      </div>
+      <div class="frame">
+        <img src="feona/hala.jpg" alt="HALA">
+        <span>“Sun, sand, and smiles”</span>
+      </div>
+      <div class="frame">
+        <img src="feona/betlog.jpg" alt="BETLOG">
+        <span>“Forever in my heart”</span>
+      </div>
+      <div class="frame">
+        <img src="feona/date.jpg" alt="DATE">
+        <span>“Forever in my heart”</span>
+      </div>
+      <div class="frame">
+        <img src="feona/matcha.jpg" alt="MATCHA">
+        <span>“Forever in my heart”</span>
+      </div>
+      <div class="frame">
+        <img src="feona/simba.jpg" alt="SIMBA">
+        <span>“Forever in my heart”</span>
+      </div>
+      <div class="frame">
+        <img src="feona/poto.jpg" alt="SIMBA">
+        <span>“Forever in my heart”</span>
+      </div>
+      <div class="frame">
+        <img src="feona/sad.jpg" alt="SIMBA">
+        <span>“Forever in my heart”</span>
+      </div>
+      <div class="frame">
+        <img src="feona/ror.jpg" alt="SIMBA">
+        <span>“Forever in my heart”</span>
+      </div>
+      <!-- ============================================================
+           ★★★ ADD MORE PHOTOS HERE ★★★
+           Copy the 4 lines below, paste them right under this comment
+           (as many times as you want), then change the file name
+           and the caption. Nothing else needs editing.
+
+      <div class="frame">
+        <img src="feona/YOUR_PHOTO.jpg" alt="describe it">
+        <span>Your caption</span>
+      </div>
+
+           ============================================================ -->
+
+    </div>
+  </div>
+</div>
+
+<!-- OPTIONAL MESSAGE BOX -->
+<div class="message-box">
+  <p>“You Complete Me”</p>
+</div>
+
+<!-- ============================================================
+     ★★★ PHOTOBOOTH VIDEOS (they sit under everything else) ★★★
+     Put your 2 video files in a folder called "videos" and change
+     the file names in the two src="..." lines below.
+     Best format: .mp4 (H.264). To add a 3rd video, copy one whole
+     <div class="video-card"> ... </div> block.
+     ============================================================ -->
+<section class="video-section reveal">
+  <h3>Photobooth </h3>
+  <div class="video-grid">
+
+    <div class="video-card">
+      <!-- ★ VIDEO 1: change the file name -->
+      <video src="vid/VID_20261001_131821.mp4" controls playsinline preload="metadata"></video>
+      <span>BLE</span>
+    </div>
+
+    <div class="video-card">
+      <!-- ★ VIDEO 2: change the file name -->
+      <video src="vid/VID_20261001_131829.mp4" controls playsinline preload="metadata"></video>
+      <span>HEHE</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- SMALL MUSIC PLAYER -->
+<div class="music-player-small">
+  <!-- ★ MUSIC FILE: tip: rename it to something without spaces, e.g. music/nothing.mp3 -->
+  <audio id="myAudio" src="music/Bruno Major - Nothing (Lyrics).mp3" loop preload="auto"></audio>
+  <button id="playBtn">▶</button>
+  <span id="trackTitle">Nothing</span>
+</div>
+
+<script>
+  const audio = document.getElementById("myAudio");
+  const playBtn = document.getElementById("playBtn");
+  const startScreen = document.getElementById("startScreen");
+  const mainCard = document.getElementById("mainCard");
+  const filmContainer = document.getElementById("filmContainer");
+
+  /* ----- MUSIC ----- */
+  function setIcon() {
+    playBtn.textContent = audio.paused ? "▶️" : "⏸️";
+  }
+
+  // Try to autoplay right away (works only on some browsers / if allowed)
+  audio.play().then(() => {
+    startScreen.classList.add("hide");
+    setIcon();
+  }).catch(() => {
+    // Blocked: wait for the first tap on the start screen
+  });
+
+  startScreen.addEventListener("click", () => {
+    audio.play().catch(() => {});
+    startScreen.classList.add("hide");
+    setIcon();
+  });
+
+  playBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+    setIcon();
+  });
+
+  /* ----- OPEN / CLOSE THE FILM STRIP (tap works on phones) ----- */
+  mainCard.addEventListener("click", (e) => {
+    if (e.target.closest(".frame")) return; // tapping a photo doesn't close it
+    mainCard.classList.toggle("open");
+    filmContainer.classList.toggle("open");
+    if (mainCard.classList.contains("open")) {
+      document.querySelector(".film-strip").scrollLeft = 0;
+    }
+  });
+
+  /* ----- ANIMATION: each photo pops in one after another ----- */
+  document.querySelectorAll(".frame").forEach((frame, i) => {
+    frame.style.setProperty("--i", i);
+  });
+
+  /* ----- ANIMATION: sections slide up when you scroll to them ----- */
+  const revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          en.target.classList.add("show");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("show"));
+  }
+
+  /* ----- VIDEOS: music pauses while a video plays, then comes back ----- */
+  let musicWasPlaying = false;
+  document.querySelectorAll(".video-card video").forEach((vid) => {
+    vid.addEventListener("play", () => {
+      // pause any other video that's playing
+      document.querySelectorAll(".video-card video").forEach((v) => {
+        if (v !== vid) v.pause();
+      });
+      if (!audio.paused) {
+        musicWasPlaying = true;
+        audio.pause();
+        setIcon();
+      }
+    });
+    const resume = () => {
+      const anyPlaying = [...document.querySelectorAll(".video-card video")].some((v) => !v.paused);
+      if (!anyPlaying && musicWasPlaying) {
+        musicWasPlaying = false;
+        audio.play().catch(() => {});
+        setIcon();
+      }
+    };
+    vid.addEventListener("pause", resume);
+    vid.addEventListener("ended", resume);
+  });
+</script>
+
+</body>
+</html>
